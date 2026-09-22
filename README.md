@@ -42,7 +42,6 @@ flowchart LR
 - **Unity Catalog** for the schemas and the Volume for raw files
 - **Databricks Jobs** for the daily schedule, task order and email alerts
 - **Serverless compute** to run every job task
-- **Git integration** to run the notebooks straight from this repo
 
 ## 🔗 Matching CRM and ERP
 

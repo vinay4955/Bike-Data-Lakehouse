@@ -33,6 +33,19 @@ flowchart LR
 | 🥈 **Silver** | Cleans each table and matches keys between CRM and ERP. |
 | 🥇 **Gold** | Builds `dim_customers` and `dim_products` with surrogate keys plus `fact_sales` that links to them. |
 
+## 🛠️ Technologies Used
+
+| Technology | Used for |
+|---|---|
+| **Databricks** | Workspace and notebooks for every layer |
+| **PySpark** | Bronze ingestion and Silver cleaning |
+| **Spark SQL** | Setup, Gold models and data quality checks |
+| **Delta Lake** | Storage format for every table |
+| **Unity Catalog** | `bronze`, `silver` and `gold` schemas plus the Volume for raw files |
+| **Databricks Jobs** | Daily schedule, task order and email alerts |
+| **Serverless compute** | Runs every job task |
+| **Git integration** | Job runs the notebooks straight from this GitHub repo |
+
 ## 🔗 Matching CRM and ERP
 
 The two systems use different keys for the same records. Silver fixes them so they join:
@@ -80,13 +93,39 @@ The pipeline runs as the Databricks Job `loading_bike_data_lakehouse` with five 
 ## 📁 Project Structure
 
 ```
-datasets/          raw CRM and ERP CSV files
-script/
-├── init_lakehouse       one-time setup
-├── run_all_pipeline     runs everything in order
-├── Bronze/              raw ingestion
-├── Silver/              cleaning notebooks + quality gate
-└── Gold/                star schema + reconciliation
+Bike-Data-Lakehouse/
+├── datasets/
+│   ├── source_crm/                     CRM exports
+│   │   ├── cust_info.csv               customers
+│   │   ├── prd_info.csv                products with price history
+│   │   └── sales_details.csv           order lines
+│   └── source_erp/                     ERP exports
+│       ├── CUST_AZ12.csv               birthdate and gender
+│       ├── LOC_A101.csv                customer country
+│       └── PX_CAT_G1V2.csv             product categories
+├── script/
+│   ├── init_lakehouse.ipynb            one-time setup: schemas and Volume
+│   ├── run_all_pipeline.ipynb          runs every layer in order
+│   ├── Bronze/
+│   │   └── Bronze_layer.ipynb          loads all six CSV files
+│   ├── Silver/
+│   │   ├── crm/
+│   │   │   ├── silver_crm_cust_info.ipynb       dedupe and decode customers
+│   │   │   ├── silver_crm_prd_info.ipynb        split keys and rebuild end dates
+│   │   │   └── silver_crm_sales_details.ipynb   fix sales and quarantine rejects
+│   │   ├── erp/
+│   │   │   ├── silver_erp_cust_az12.ipynb       fix IDs and birthdates
+│   │   │   ├── silver_erp_loc_a101.ipynb        fix IDs and country names
+│   │   │   └── silver_erp_px_cat_g1v2.ipynb     maintenance flag to boolean
+│   │   ├── silver_orchestration.ipynb  runs the six Silver notebooks
+│   │   └── silver_checks.ipynb         quality gate before Gold
+│   └── Gold/
+│       ├── gold_dim_customers.ipynb    customer dimension
+│       ├── gold_dim_products.ipynb     product dimension (current versions)
+│       ├── gold_fact_sales.ipynb       sales fact table
+│       ├── gold_orchestration.ipynb    dimensions first then the fact
+│       └── gold_checks.ipynb           reconciliation with Silver
+└── docs/images/                        job screenshots used in this README
 ```
 
 ## 🔭 Next Steps

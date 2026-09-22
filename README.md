@@ -35,16 +35,14 @@ flowchart LR
 
 ## 🛠️ Technologies Used
 
-| Technology | Used for |
-|---|---|
-| **Databricks** | Workspace and notebooks for every layer |
-| **PySpark** | Bronze ingestion and Silver cleaning |
-| **Spark SQL** | Setup, Gold models and data quality checks |
-| **Delta Lake** | Storage format for every table |
-| **Unity Catalog** | `bronze`, `silver` and `gold` schemas plus the Volume for raw files |
-| **Databricks Jobs** | Daily schedule, task order and email alerts |
-| **Serverless compute** | Runs every job task |
-| **Git integration** | Job runs the notebooks straight from this GitHub repo |
+- **Databricks** for the workspace and notebooks
+- **PySpark** for Bronze ingestion and Silver cleaning
+- **Spark SQL** for setup, Gold models and data quality checks
+- **Delta Lake** as the storage format for every table
+- **Unity Catalog** for the schemas and the Volume for raw files
+- **Databricks Jobs** for the daily schedule, task order and email alerts
+- **Serverless compute** to run every job task
+- **Git integration** to run the notebooks straight from this repo
 
 ## 🔗 Matching CRM and ERP
 
@@ -127,13 +125,6 @@ Bike-Data-Lakehouse/
 │       └── gold_checks.ipynb           reconciliation with Silver
 └── docs/images/                        job screenshots used in this README
 ```
-
-## 🔭 Next Steps
-
-- Incremental loads with Auto Loader and `MERGE`
-- Stable surrogate keys instead of `ROW_NUMBER()`
-- SCD Type 2 in `dim_products` (Silver already keeps every product version)
-- Explicit Bronze schemas instead of `inferSchema`
 
 ## 🙏 Credits
 

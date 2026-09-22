@@ -48,7 +48,7 @@ flowchart LR
 
 ## 🔗 Matching CRM and ERP
 
-The two systems use different keys for the same records. Silver fixes them so they join:
+The two systems use different keys for the same records. Silver fixes them, so they join:
 
 | Entity | CRM | ERP | Fix |
 |---|---|---|---|

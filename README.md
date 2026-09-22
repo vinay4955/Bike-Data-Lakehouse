@@ -68,6 +68,8 @@ The pipeline runs as the Databricks Job `loading_bike_data_lakehouse` with five 
 - **Alerts:** email on start, success and failure.
 - **Runtime:** a full run takes about 4 to 5 minutes.
 
+![Successful job runs](docs/images/databricks_job_runs.png)
+
 ## 🚀 Getting Started
 
 1. Import the `script/` folder into a Databricks workspace.

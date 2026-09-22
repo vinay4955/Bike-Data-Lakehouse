@@ -56,12 +56,24 @@ Other Silver fixes: duplicate customers keep their newest record. Product end da
 
 **Gold checks** confirm that `fact_sales` has the same row count and total sales as Silver.
 
+## ⚙️ Orchestration
+
+The pipeline runs as the Databricks Job `loading_bike_data_lakehouse` with five tasks in sequence:
+
+![Databricks job pipeline](docs/images/databricks_job_pipeline.png)
+
+- **Schedule:** daily at 01:00 (Europe/Berlin).
+- **Compute:** serverless with performance optimization on.
+- **Source:** notebooks run straight from this GitHub repo.
+- **Alerts:** email on start, success and failure.
+- **Runtime:** a full run takes about 4 to 5 minutes.
+
 ## 🚀 Getting Started
 
 1. Import the `script/` folder into a Databricks workspace.
 2. Run `init_lakehouse` once to create the schemas and the Volume.
 3. Upload `datasets/source_crm` and `datasets/source_erp` to `/Volumes/workspace/bronze/source_systems/`.
-4. Run `run_all_pipeline` or schedule it as a Databricks Job.
+4. Run `run_all_pipeline` once by hand or set up a Job like the one above.
 
 ## 📁 Project Structure
 

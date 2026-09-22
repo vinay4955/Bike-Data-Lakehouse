@@ -1,4 +1,4 @@
-# 🚲 Bike Data Lakehouse
+# 🚲 Bike Sales Data Lakehouse
 
 ![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=for-the-badge&logo=databricks&logoColor=white)
 ![Apache Spark](https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)

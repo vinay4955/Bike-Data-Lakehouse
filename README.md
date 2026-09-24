@@ -70,13 +70,21 @@ Other Silver fixes: duplicate customers keep their newest record. Product end da
 
 The pipeline runs as the Databricks Job `loading_bike_data_lakehouse` with five tasks in sequence:
 
-![Databricks job pipeline](docs/images/databricks_job_pipeline.png)
+![Databricks job timeline](docs/images/databricks_job_pipeline.png)
+
+| Task | Typical duration |
+|---|---|
+| Bronze_layer | ~1m 30s |
+| Silver_layer | ~2m 32s |
+| Quality_check | ~12s |
+| Gold_layer | ~1m 8s |
+| Final_check | ~10s |
 
 - **Schedule:** daily at 01:00 (Europe/Berlin).
 - **Compute:** serverless with performance optimization on.
 - **Source:** notebooks run straight from this GitHub repo.
 - **Alerts:** email on start, success and failure.
-- **Runtime:** a full run takes about 4 to 5 minutes.
+- **Runtime:** a full run takes about 5 to 6 minutes end to end.
 
 ![Successful job runs](docs/images/databricks_job_runs.png)
 
